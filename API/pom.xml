@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.care4memory</groupId>
-	<artifactId>API</artifactId>
+	<artifactId>memory-nest-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Memory-Nest</name>
 	<description>Memory-Nest-Alzheimer&apos;s Support project for Spring Boot</description>
