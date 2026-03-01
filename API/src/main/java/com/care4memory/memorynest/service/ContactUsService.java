@@ -1,20 +1,43 @@
 package com.care4memory.memorynest.service;
 
-import com.care4memory.memorynest.model.ContactUs;
-import com.care4memory.memorynest.repositories.ContactRepository;
+import com.care4memory.memorynest.dto.ContactUsDTO;
+import com.care4memory.memorynest.model.ContactUsEntity;
+import com.care4memory.memorynest.repositories.ContactUsRepository;
 import org.springframework.stereotype.Service;
 
 
 @Service
-public class ContactService {
+public class ContactUsService {
 
-    private ContactRepository contactRepository;
+    private ContactUsRepository contactUsRepository;
 
-        public ContactService(ContactRepository contactRepository) {
-            this.contactRepository = contactRepository;
+        public ContactUsService(ContactUsRepository contactUsRepository) {
+            this.contactUsRepository = contactUsRepository;
         }
 
-        public ContactUs addContact(ContactUs contactUs) {
-            return contactRepository.save(contactUs);
+        public ContactUsDTO addContact(ContactUsDTO contactUsDTO) {
+            ContactUsEntity contactUsEntity = convertToEntity(contactUsDTO);
+            ContactUsEntity savedEntity = this.contactUsRepository.save(contactUsEntity);
+            return convertToDto(savedEntity);
+        }
+
+        private ContactUsDTO convertToDto(ContactUsEntity contactUsEntity) {
+            ContactUsDTO contactUsDTO = new ContactUsDTO();
+            contactUsDTO.setContactId(contactUsEntity.getContactId());
+            contactUsDTO.setFirstName(contactUsEntity.getFirstName());
+            contactUsDTO.setLastName(contactUsEntity.getLastName());
+            contactUsDTO.setEmail(contactUsEntity.getEmail());
+            contactUsDTO.setMessage(contactUsEntity.getMessage());
+            return contactUsDTO;
+        }
+
+        private ContactUsEntity convertToEntity(ContactUsDTO contactUsDTO) {
+            ContactUsEntity contactUsEntity = new ContactUsEntity();
+            contactUsEntity.setContactId(contactUsDTO.getContactId());
+            contactUsEntity.setFirstName(contactUsDTO.getFirstName());
+            contactUsEntity.setLastName(contactUsDTO.getLastName());
+            contactUsEntity.setEmail(contactUsDTO.getEmail());
+            contactUsEntity.setMessage(contactUsDTO.getMessage());
+            return contactUsEntity;
         }
 }
