@@ -7,19 +7,19 @@ import jakarta.persistence.Id;
 
 
 @Entity
-public class ContactUs {
+public class ContactUsEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer contactId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long contactId;
     private String firstName;
     private String lastName;
     private String email;
     private String message;
 
-    public ContactUs() {
+    public ContactUsEntity() {
     }
 
-    public ContactUs(Integer contactId, String firstName, String lastName, String email, String message) {
+    public ContactUsEntity(Long contactId, String firstName, String lastName, String email, String message) {
         this.contactId = contactId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -27,11 +27,11 @@ public class ContactUs {
         this.message = message;
     }
 
-    public Integer getContactId() {
+    public Long getContactId() {
         return contactId;
     }
 
-    public void setContactId(Integer contactId) {
+    public void setContactId(Long contactId) {
         this.contactId = contactId;
     }
 
