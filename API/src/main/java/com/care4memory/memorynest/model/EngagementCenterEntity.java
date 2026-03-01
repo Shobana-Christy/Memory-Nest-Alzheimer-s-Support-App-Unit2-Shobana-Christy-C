@@ -6,28 +6,27 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class EngagementCenter {
+public class EngagementCenterEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer engagementCenterId;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long engagementCenterId;
     private String name;
     private String src;
 
-    public EngagementCenter() {
+    public EngagementCenterEntity() {
     }
 
-    public EngagementCenter(Integer engagementCenterId, String name, String src) {
+    public EngagementCenterEntity(Long engagementCenterId, String name, String src) {
         this.engagementCenterId = engagementCenterId;
         this.name = name;
         this.src = src;
     }
 
-    public Integer getEngagementCenterId() {
+    public Long getEngagementCenterId() {
         return engagementCenterId;
     }
 
-    public void setEngagementCenterId(Integer engagementCenterId) {
+    public void setEngagementCenterId(Long engagementCenterId) {
         this.engagementCenterId = engagementCenterId;
     }
 
