@@ -12,7 +12,7 @@ public class ReminderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reminderId;
 
-//    @ManyToOne
+    //    @ManyToOne
 //    @JoinColumn(name = "user_role_id", nullable = false)
 //    private UserRole userRoleId;
     private String name;

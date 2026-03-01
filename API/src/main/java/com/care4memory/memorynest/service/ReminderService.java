@@ -16,7 +16,7 @@ public class ReminderService {
 
 
     public List<ReminderDTO> viewReminders() {
-        return reminderRepository.findAll()
+        return this.reminderRepository.findAll()
                 .stream()
                 .map(this::convertToDto)   //(re) => convertToDto(re)
                 .toList();
@@ -24,26 +24,26 @@ public class ReminderService {
     }
 
     public ReminderDTO getReminderById(Long reminderId) {
-        return reminderRepository.findById(reminderId)
-                        .map(this::convertToDto)
-                        .orElse(null);
+        return this.reminderRepository.findById(reminderId)
+                .map(this::convertToDto)
+                .orElse(null);
     }
 
     public ReminderDTO addReminder(ReminderDTO reminderDTO) {
         ReminderEntity entity = convertToEntity(reminderDTO);
-        ReminderEntity savedEntity = reminderRepository.save(entity);
+        ReminderEntity savedEntity = this.reminderRepository.save(entity);
         return convertToDto(savedEntity);
     }
 
     public ReminderDTO updateReminder(Long reminderId, ReminderDTO reminderDTO) {
-       ReminderEntity entity = convertToEntity(reminderDTO);
-       entity.setReminderId(reminderId);
-       ReminderEntity updatedEntity = reminderRepository.save(entity);
-         return convertToDto(updatedEntity);
+        ReminderEntity entity = convertToEntity(reminderDTO);
+        entity.setReminderId(reminderId);
+        ReminderEntity updatedEntity = this.reminderRepository.save(entity);
+        return convertToDto(updatedEntity);
     }
 
     public void deleteReminder(Long reminderId) {
-        reminderRepository.deleteById(reminderId);
+        this.reminderRepository.deleteById(reminderId);
     }
 
     private ReminderDTO convertToDto(ReminderEntity reminderEntity) {
