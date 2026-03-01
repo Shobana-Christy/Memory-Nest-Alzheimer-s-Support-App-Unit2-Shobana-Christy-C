@@ -2,17 +2,15 @@ package com.care4memory.memorynest.model;
 
 import jakarta.persistence.*;
 
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 @Entity
-public class Reminder {
+public class ReminderEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer reminderId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long reminderId;
 
 //    @ManyToOne
 //    @JoinColumn(name = "user_role_id", nullable = false)
@@ -22,10 +20,10 @@ public class Reminder {
     private LocalTime time;
     private String notes;
 
-    public Reminder() {
+    public ReminderEntity() {
     }
 
-    public Reminder(Integer reminderId, String name, LocalDate date, LocalTime time, String notes) {
+    public ReminderEntity(Long reminderId, String name, LocalDate date, LocalTime time, String notes) {
         this.reminderId = reminderId;
         this.name = name;
         this.date = date;
@@ -34,11 +32,11 @@ public class Reminder {
 
     }
 
-    public Integer getReminderId() {
+    public Long getReminderId() {
         return reminderId;
     }
 
-    public void setReminderId(Integer reminderId) {
+    public void setReminderId(Long reminderId) {
         this.reminderId = reminderId;
     }
 
