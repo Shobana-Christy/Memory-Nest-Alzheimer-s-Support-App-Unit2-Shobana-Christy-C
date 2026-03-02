@@ -1,6 +1,6 @@
 package com.care4memory.memorynest.dto;
 
-public class AlbumDTO {
+public class AlbumItemDTO {
     private String id;
     private String name;
     private String description;
