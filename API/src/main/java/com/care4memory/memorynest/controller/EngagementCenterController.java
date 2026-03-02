@@ -1,7 +1,6 @@
 package com.care4memory.memorynest.controller;
 
 import com.care4memory.memorynest.dto.EngagementCenterDTO;
-import com.care4memory.memorynest.model.EngagementCenterEntity;
 import com.care4memory.memorynest.service.EngagementCenterService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
