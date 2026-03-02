@@ -6,6 +6,7 @@ import java.time.LocalTime;
 public class ReminderDTO {
 
     private Long reminderId;
+    private Long userRoleId;
     private String name;
     private LocalDate date;
     private LocalTime time;
@@ -15,8 +16,9 @@ public class ReminderDTO {
     public ReminderDTO() {
     }
 
-    public ReminderDTO(Long reminderId, String name, LocalDate date, LocalTime time, String notes) {
+    public ReminderDTO(Long reminderId,Long userRoleId, String name, LocalDate date, LocalTime time, String notes) {
         this.reminderId = reminderId;
+        this.userRoleId = userRoleId;
         this.name = name;
         this.date = date;
         this.time = time;
@@ -29,6 +31,13 @@ public class ReminderDTO {
 
     public void setReminderId(Long reminderId) {
         this.reminderId = reminderId;
+    }
+
+    public Long getUserRoleId() {
+        return userRoleId;
+    }
+    public void setUserRoleId(Long userRoleId) {
+        this.userRoleId = userRoleId;
     }
 
     public String getName() {
