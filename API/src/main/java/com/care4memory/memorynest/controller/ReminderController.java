@@ -1,6 +1,7 @@
 package com.care4memory.memorynest.controller;
 
 import com.care4memory.memorynest.dto.ReminderDTO;
+import com.care4memory.memorynest.dto.UserRoleDTO;
 import com.care4memory.memorynest.model.ReminderEntity;
 import com.care4memory.memorynest.service.ReminderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,14 +40,23 @@ public class ReminderController {
 
     @PostMapping()
     public ResponseEntity<ReminderDTO> addReminder(@RequestBody ReminderDTO reminderDTO) {
-        ReminderDTO saved = this.reminderService.addReminder(reminderDTO);
+        UserRoleDTO userRoleDTO = new UserRoleDTO();
+        userRoleDTO.setUserRoleId(1L); // hard code for demo
+        userRoleDTO.setEmail("john.doe@gmail.com");
+        userRoleDTO.setRole("CareTaker");
+        ReminderDTO saved = this.reminderService.addReminder(reminderDTO, userRoleDTO);
         return ResponseEntity.status(201).body(saved); // Return the saved reminder with HTTP 200 OK status
     }
 
 
     @PutMapping("/{id}")
     public ResponseEntity<ReminderDTO> updateReminder(@PathVariable Long id, @RequestBody ReminderDTO reminderDTO) {
-        ReminderDTO updated = this.reminderService.updateReminder(id, reminderDTO);
+        // should come from logged in user details
+        UserRoleDTO userRoleDTO = new UserRoleDTO();
+        userRoleDTO.setUserRoleId(1L); // hard code for demo
+        userRoleDTO.setEmail("shobichristy07@gmail.com");
+        userRoleDTO.setRole("CareTaker");
+        ReminderDTO updated = this.reminderService.updateReminder(id, reminderDTO, userRoleDTO);
         return ResponseEntity.ok(updated); // Return the updated reminder with HTTP 200 OK status
     }
 
