@@ -24,7 +24,8 @@ public class ReminderEntity {
     public ReminderEntity() {
     }
 
-    public ReminderEntity(Long reminderId, String name, LocalDate date, LocalTime time, String notes) {
+    public ReminderEntity(UserRoleEntity userRole, Long reminderId, String name, LocalDate date, LocalTime time, String notes) {
+        this.userRole = userRole;
         this.reminderId = reminderId;
         this.name = name;
         this.date = date;

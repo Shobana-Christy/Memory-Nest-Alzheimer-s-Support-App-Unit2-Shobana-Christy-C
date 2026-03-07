@@ -13,8 +13,8 @@ public class UserRoleEntity {
     private String role;
     private String email;
 
-//    @OneToMany(mappedBy = "userRole", cascade = CascadeType.ALL)
-//    private List<ReminderEntity> reminders;
+    @OneToMany(mappedBy = "userRole", cascade = CascadeType.ALL)
+    private List<ReminderEntity> reminders;
 
 
     public Long getUserRoleId() {
@@ -40,12 +40,12 @@ public class UserRoleEntity {
     public void setEmail(String email) {
         this.email = email;
     }
-//
-//    public List<ReminderEntity> getReminders() {
-//        return reminders;
-//    }
-//
-//    public void setReminders(List<ReminderEntity> reminders) {
-//        this.reminders = reminders;
-//    }
+
+    public List<ReminderEntity> getReminders() {
+        return reminders;
+    }
+
+    public void setReminders(List<ReminderEntity> reminders) {
+        this.reminders = reminders;
+    }
 }

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d08a6f46-8243-4cab-af47-ef8c1141470a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/API/src/main/java/com/care4memory/memorynest/controller/UserRoleContoller.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/com/care4memory/memorynest/controller/UserRoleContoller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/src/main/java/com/care4memory/memorynest/model/ReminderEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/com/care4memory/memorynest/model/ReminderEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/src/main/java/com/care4memory/memorynest/model/UserRoleEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/API/src/main/java/com/care4memory/memorynest/model/UserRoleEntity.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_C:/Users/shoba/LaunchCode-Java-Projects/Memory-Nest-Alzheimer-s-Support-App-Unit2-Shobana-Christy-C" value="3A9DV5TYLr85FNKEEKWxDWDkJRS" />
+      <entry key="_C:/Users/shoba/LaunchCode-Java-Projects/Memory-Nest-Alzheimer-s-Support-App-Unit2-Shobana-Christy-C/API" value="3ABmvFM2KDmbD7FkPHYEbGu30Ze" />
+    </persistenceIdMap>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Shobana-Christy&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Shobana-Christy/Memory-Nest-Alzheimer-s-Support-App-Unit2-Shobana-Christy-C.git&quot;,
+    &quot;accountId&quot;: &quot;436626a3-c91f-4c38-981c-df40ac87d5de&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="3A9DV5TYLr85FNKEEKWxDWDkJRS" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.MemoryNestApplication.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/shoba/LaunchCode-Java-Projects/Memory-Nest-Alzheimer-s-Support-App-Unit2-Shobana-Christy-C&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.care4memory.memorynest.dto" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="MemoryNestApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <envs>
+        <env name="DB_USERNAME" value="root" />
+        <env name="DB_PASSWORD" value="IreKat@22" />
+      </envs>
+      <option name="MAIN_CLASS_NAME" value="com.care4memory.memorynest.MemoryNestApplication" />
+      <module name="memory-nest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.care4memory.memorynest.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MemoryNestApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d08a6f46-8243-4cab-af47-ef8c1141470a" name="Changes" comment="" />
+      <created>1771995913071</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1771995913071</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>
