@@ -2,9 +2,7 @@ package com.care4memory.memorynest.controller;
 
 import com.care4memory.memorynest.dto.ReminderDTO;
 import com.care4memory.memorynest.dto.UserRoleDTO;
-import com.care4memory.memorynest.model.ReminderEntity;
 import com.care4memory.memorynest.service.ReminderService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

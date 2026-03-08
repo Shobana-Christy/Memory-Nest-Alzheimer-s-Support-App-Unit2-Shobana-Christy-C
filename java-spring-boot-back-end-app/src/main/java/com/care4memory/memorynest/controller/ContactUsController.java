@@ -1,7 +1,6 @@
 package com.care4memory.memorynest.controller;
 
 import com.care4memory.memorynest.dto.ContactUsDTO;
-import com.care4memory.memorynest.model.ContactUsEntity;
 import com.care4memory.memorynest.service.ContactUsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
