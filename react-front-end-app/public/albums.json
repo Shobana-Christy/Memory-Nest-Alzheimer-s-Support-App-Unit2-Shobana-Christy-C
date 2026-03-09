@@ -1,0 +1,46 @@
+[
+    {
+        "id": 1,
+        "name": "Childhood Days",
+        "src": [
+            "/images/pexels-yuuilina-9066554.jpg"
+               ],
+        "description": "Stories, photos, and songs from early years — school, friends, and favorite games."
+    },
+    {
+        "id": 2,
+        "name": "Family Moments",
+        "src": [
+            "/images/pexels-cottonbro-3171202.jpg",
+            "/images/pexels-nicole-michalou-5775062.jpg"
+        ],
+        "description": "Special occasions with loved ones — birthdays, weddings, and family gatherings."
+    },
+    {
+        "id": 3,
+        "name": "Travel Adventures",
+        "src": [
+            "/images/pexels-ahmetyuksek-34123124.jpg",
+            "/images/pexels-optical-chemist-340351297-31241797.jpg",
+            "/images/pexels-thehumantra-13517369.jpg"
+        ],
+        "description": "Trips and journeys — places visited, favorite foods, and cultural experiences."
+    },
+    {
+        "id": 4,
+        "name": "Life Achievements",
+        "src": [
+            "/images/pexels-cottonbro-4480450.jpg"
+        ],
+        "description": "Memories of career milestones, personal goals, and proud accomplishments."
+    },
+    {
+        "id": 5,
+        "name": "Golden Reflections",
+        "src": [
+            "/images/pexels-andreas-schnabl-1775843-19327034.jpg",
+            "/images/pexels-aysegul-aytoren-46790226-14525005.jpg"
+        ],
+        "description": "Peaceful times — hobbies, gardens, music, and quiet evenings."
+    }
+]

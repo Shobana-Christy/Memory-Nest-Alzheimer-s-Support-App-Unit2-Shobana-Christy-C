@@ -1,0 +1,18 @@
+.alert-box-container {
+    border: 1px solid #000;
+    border-radius: 5px;
+    text-align: center;
+    width: 200px;
+    height: 50px;
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%; /*50% of screen height from top*/
+    left: 50%; /*50% of screen width from left*/
+    transform: translate(-50%, -50%); /* "-" shifts back, 50% of this container width and height*/
+    backdrop-filter: blur(4px);
+    color: blue;
+    font-weight: bold;
+}
