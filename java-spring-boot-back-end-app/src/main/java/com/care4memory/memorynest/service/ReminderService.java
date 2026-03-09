@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class ReminderService {
 
-    private ReminderRepository reminderRepository;
+    private final ReminderRepository reminderRepository;
     private final UserRoleRepository userRoleRepository;
 
     public ReminderService(ReminderRepository reminderRepository, UserRoleRepository userRoleRepository) {
@@ -43,7 +43,7 @@ public class ReminderService {
 
     public ReminderDTO updateReminder(Long reminderId, ReminderDTO reminderDTO, UserRoleDTO userRoleDTO) {
         ReminderEntity entity = convertToEntity(reminderDTO);
-        entity.setReminderId(reminderId);
+        entity.setId(reminderId);
         entity.setUserRole(convertToUserRoleEntity(userRoleDTO));
         ReminderEntity updatedEntity = this.reminderRepository.save(entity);
         return convertToDto(updatedEntity);
@@ -55,7 +55,7 @@ public class ReminderService {
 
     private ReminderDTO convertToDto(ReminderEntity reminderEntity) {
         ReminderDTO reminderDTO = new ReminderDTO();
-        reminderDTO.setReminderId(reminderEntity.getReminderId());
+        reminderDTO.setId(reminderEntity.getId());
         reminderDTO.setName(reminderEntity.getName());
         reminderDTO.setDate(reminderEntity.getDate());
         reminderDTO.setTime(reminderEntity.getTime());
@@ -66,7 +66,7 @@ public class ReminderService {
 
     private ReminderEntity convertToEntity(ReminderDTO reminderDTO) {
         ReminderEntity reminderEntity = new ReminderEntity();
-        reminderEntity.setReminderId(reminderDTO.getReminderId());
+        reminderEntity.setId(reminderDTO.getId());
         reminderEntity.setName(reminderDTO.getName());
         reminderEntity.setDate(reminderDTO.getDate());
         reminderEntity.setTime(reminderDTO.getTime());
