@@ -16,7 +16,7 @@ public class SecurityConfig {
                 .cors(cors -> {})   // <-- REQUIRED
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login", "/error").permitAll()
+                        .requestMatchers("/login", "/error", "/*").permitAll()
                         .anyRequest().authenticated()
                 )
                 // enables Google login
