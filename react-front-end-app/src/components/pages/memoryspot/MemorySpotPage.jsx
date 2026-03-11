@@ -4,11 +4,22 @@ import { useState } from "react";
 import "./memoryspot.css"
 import LoadingPage from "../LoadingPage";
 import AlbumDetail from "./AlbumDetail";
+import { useEffect } from "react";
+import { fetchAlbums } from "../../common/dataCollection";
 
 const MemorySpotPage = () => {
     let [isLoading, setIsLoading] = useState(true);
     let [albums, setAlbums] = useState([]);
     let [selectedAlbum, setSelectedAlbum] = useState(null);
+
+    useEffect(() => {
+        const responsePromiseOne = fetchAlbums();
+        responsePromiseOne.then((albums) => {
+            setIsLoading(false);
+            setAlbums(albums);
+            console.log("albums: ", albums);
+        });
+    }, []);
 
     const handleEvent = (event, album) => {
         event.preventDefault();
