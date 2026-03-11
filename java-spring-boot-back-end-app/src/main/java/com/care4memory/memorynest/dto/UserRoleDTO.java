@@ -6,7 +6,6 @@ public class UserRoleDTO {
     private String role;
     private String email;
 
-
     public Long getUserRoleId() {
         return userRoleId;
     }

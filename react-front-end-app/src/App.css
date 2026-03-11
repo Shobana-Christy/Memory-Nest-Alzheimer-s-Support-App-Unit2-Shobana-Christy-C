@@ -1,0 +1,16 @@
+html, body {
+  height: 100%; /** header, main & footer uses percentage of parent which is <body> */
+  margin: 0;
+  padding: 0;
+  background-color:#f3f3f3;
+}
+
+#body-container {
+  height: 100%;
+}
+
+main {
+    height: 80%;
+    overflow-y: auto;
+    background-color:#f3f3f3 ;
+}

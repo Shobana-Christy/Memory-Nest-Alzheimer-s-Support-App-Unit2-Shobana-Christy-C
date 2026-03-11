@@ -1,0 +1,35 @@
+.memoryspot-container a {
+    text-decoration: none;
+}
+
+.memoryspot-container a:hover {
+    color: #ac4848;
+}
+
+.memoryspot-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.memoryspot-container h3 {
+    font-size: medium;
+}
+
+.album-picture {
+    /* transform: scale(0.1); */
+    max-width: 35%;
+    /* never exceed parent width */
+    height: auto;
+    /* keep proportions */
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #000;
+    border-radius: 15px;
+
+}
+
+.album-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 95vw;
+}

@@ -10,7 +10,8 @@ public class ReminderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long reminderId;
+    @Column(name = "reminder_id")
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user_role_id", nullable = false)
@@ -24,14 +25,13 @@ public class ReminderEntity {
     public ReminderEntity() {
     }
 
-    public ReminderEntity(UserRoleEntity userRole, Long reminderId, String name, LocalDate date, LocalTime time, String notes) {
+    public ReminderEntity(UserRoleEntity userRole, Long id, String name, LocalDate date, LocalTime time, String notes) {
         this.userRole = userRole;
-        this.reminderId = reminderId;
+        this.id = id;
         this.name = name;
         this.date = date;
         this.time = time;
         this.notes = notes;
-
     }
 
     public UserRoleEntity getUserRole() {
@@ -42,12 +42,12 @@ public class ReminderEntity {
         this.userRole = userRole;
     }
 
-    public Long getReminderId() {
-        return reminderId;
+    public Long getId() {
+        return id;
     }
 
-    public void setReminderId(Long reminderId) {
-        this.reminderId = reminderId;
+    public void setId(Long reminderId) {
+        this.id = reminderId;
     }
 
     public String getName() {
@@ -81,6 +81,7 @@ public class ReminderEntity {
     public void setNotes(String notes) {
         this.notes = notes;
     }
+
 
 
 }
