@@ -68,7 +68,6 @@ export async function updateReminder(reminder) {
             return response.json();
         }
     } catch (error) {
-        // TODO: Use popup to notify user of failure
         return null;
     }
 
@@ -100,7 +99,25 @@ export async function deleteReminder(reminderId) {
 export async function fetchAlbums() {
     try {
         let time = new Date().getTime();
-        let response = await fetch(baseUrl+"/albums?time="+time, { credentials: "include" });
+        let response = await fetch(baseUrl+"/memoryspot/albums?time="+time, {
+            credentials: "include"
+        });
+        if (response.ok) {
+            return response.json();
+        }
+    } catch (error) {
+        return [];
+    }
+
+    return [];
+}
+
+export async function fetchAlbumContent(albumName) {
+    try {
+        let time = new Date().getTime();
+        let response = await fetch(baseUrl+"/memoryspot/albums/"+albumName, {
+            credentials: "include"
+        });
         if (response.ok) {
             return response.json();
         }
