@@ -21,8 +21,8 @@ const AlbumDetail = ({ album }) => {
         <>
         <div className="album-container">
             {
-                albumContent.map((conent, index) =>
-                        (<img src={conent.url} alt={conent.name} key={index} className="album-picture" />)
+                albumContent.map((content, index) =>
+                        (<img src={content.url} alt={content.name} key={index} className="album-picture" />)
                 )
             }
             </div>
