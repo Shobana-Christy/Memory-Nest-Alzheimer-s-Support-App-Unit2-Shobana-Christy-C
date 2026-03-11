@@ -4,12 +4,17 @@ import com.care4memory.memorynest.dto.AlbumDTO;
 import com.care4memory.memorynest.dto.AlbumItemDTO;
 import com.care4memory.memorynest.service.MemorySpotService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-@RestController("memoryspot")
+@RestController
+@RequestMapping("/memoryspot")
 public class MemorySpotController {
 
     private final MemorySpotService memorySpotService;
@@ -18,19 +23,18 @@ public class MemorySpotController {
         this.memorySpotService = memorySpotService;
     }
 
-    @GetMapping("/albums")
+    @GetMapping(value = "/albums")
     public ResponseEntity<List<AlbumDTO>> getAlbums() throws Exception {
-        // This should come from the logged-in user's details
-        String loggedInUserEmail = "john.doe@gmail.com";
+        String loggedInUserEmail = getLoggedInUserEmail();
         List<AlbumDTO> albums = this.memorySpotService.getAllAlbums(loggedInUserEmail);
         // Return the list of albums with HTTP 200 OK status
         return ResponseEntity.ok(albums);
     }
 
     @GetMapping("/albums/{albumName}")
-    public ResponseEntity<List<AlbumItemDTO>> getAlbumById(@PathVariable String albumName) throws Exception {
+    public ResponseEntity<List<AlbumItemDTO>> getAlbumContent(@PathVariable String albumName) throws Exception {
         // This should come from the logged-in user's details
-        String loggedInUserEmail = "john.doe@gmail.com";
+        String loggedInUserEmail = getLoggedInUserEmail();
         List<AlbumItemDTO> albumItemDTO = this.memorySpotService.getAlbumContent(loggedInUserEmail, albumName);
         if (albumItemDTO == null) {
             // Return HTTP 404 Not Found if album is not found
@@ -45,12 +49,21 @@ public class MemorySpotController {
                                                  @RequestParam("file") MultipartFile file)
             throws Exception {
         // This should come from the logged-in user's details
-        String loggedInUserEmail = "john.doe@gmail.com";
+        String loggedInUserEmail = getLoggedInUserEmail();
         AlbumDTO savedAlbum = this.memorySpotService.addAlbum(loggedInUserEmail,
                 albumName, file);
         // Return the saved album item with HTTP 201 Created status
         return ResponseEntity
                 .status(201)
                 .body(savedAlbum);
+    }
+
+    private String getLoggedInUserEmail() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() != null) {
+            OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
+            return oauth2User.getAttribute("email");
+        }
+        return null;
     }
 }
