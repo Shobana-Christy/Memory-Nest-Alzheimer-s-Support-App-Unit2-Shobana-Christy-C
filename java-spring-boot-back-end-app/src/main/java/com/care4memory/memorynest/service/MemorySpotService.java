@@ -26,7 +26,7 @@ public class MemorySpotService {
     public List<AlbumDTO> getAllAlbums(String loggedInUserEmail) throws Exception {
         // Logic to retrieve all albums
         ApiResponse response = cloudinary.api()
-                .subFolders(loggedInUserEmail, null);
+                .subFolders(getFolderPath(loggedInUserEmail), null);
 
         List<Map> albumsDetails = (List<Map>) response.get("folders");
         return albumsDetails
@@ -37,9 +37,9 @@ public class MemorySpotService {
 
     public List<AlbumItemDTO> getAlbumContent(String loggedInUserEmail, String albumName) throws Exception {
         // Logic to retrieve an album by its ID
-        String folderPath = loggedInUserEmail + "/" + albumName;
-        Map input = ObjectUtils.asMap("type", "upload", "prefix", folderPath, "max_results", 30);
-        ApiResponse response = cloudinary.api().resources(input);
+        String folderPath = getFolderPath(loggedInUserEmail) + "/" + albumName;
+        Map input = ObjectUtils.asMap("resource_type", "image", "asset_folder", folderPath, "max_results", 30);
+        ApiResponse response = cloudinary.api().resourcesByAssetFolder(folderPath, input);
         List<Map> resources = (List<Map>) response.get("resources");
         return resources
                 .stream()
@@ -49,7 +49,7 @@ public class MemorySpotService {
 
     public AlbumDTO addAlbum(String loggedInUserEmail, String albumName, MultipartFile file) throws Exception {
         // Logic to save a new album
-        String folderPath = loggedInUserEmail + "/" + albumName;
+        String folderPath = getFolderPath(loggedInUserEmail) + "/" + albumName;
         Map uploadResult = cloudinary.uploader()
                 .upload(file.getBytes(),
                         ObjectUtils.asMap("folder", folderPath));
@@ -59,7 +59,7 @@ public class MemorySpotService {
 
     public void deleteAlbum(String loggedInUserEmail, String albumName) throws Exception {
         // Logic to delete an album by its ID
-        String folderPath = loggedInUserEmail + "/" + albumName;
+        String folderPath = getFolderPath(loggedInUserEmail) + "/" + albumName;
         Map deleteAlbum = cloudinary.api()
                 .deleteResourcesByPrefix(folderPath + "/",
                         ObjectUtils.asMap("resource_type", "image")
@@ -68,11 +68,15 @@ public class MemorySpotService {
         cloudinary.api().deleteFolder(folderPath, ObjectUtils.emptyMap());
     }
 
-    public void deleteAlbumItem(String publicId) throws Exception {
+    public void deleteAlbumItem(String id) throws Exception {
         // Logic to delete an album item by its ID
-        cloudinary.uploader().destroy(publicId, ObjectUtils.emptyMap());
+        cloudinary.uploader().destroy(id, ObjectUtils.emptyMap());
     }
 
+    private String getFolderPath(String loggedInUserEmail) {
+        return loggedInUserEmail.trim().replace("@", "-")
+                .replace(".", "-").replaceAll("_", "-");
+    }
 
     private AlbumDTO mapToAlbumDTO(Map albumList) {
         AlbumDTO albumDTO = new AlbumDTO();
@@ -85,7 +89,8 @@ public class MemorySpotService {
         albumItemDTO.setId((String) albumDetails.get("asset_id"));
         albumItemDTO.setName((String) albumDetails.get("display_name"));
         albumItemDTO.setUrl((String) albumDetails.get("secure_url"));
-//        albumItemDTO.setUrl((String) albumDetails.get("url"));
+        albumItemDTO.setWidth((int) albumDetails.get("width"));
+        albumItemDTO.setHeight((int) albumDetails.get("height"));
         return albumItemDTO;
     }
 
