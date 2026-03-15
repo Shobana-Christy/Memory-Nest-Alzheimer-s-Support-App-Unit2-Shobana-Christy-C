@@ -31,6 +31,21 @@ public class MemorySpotController {
         return ResponseEntity.ok(albums);
     }
 
+    @PostMapping(value = "/albums")
+    public ResponseEntity<String> saveAlbum(@RequestParam("name") String albumName,
+                                            @RequestParam("pictures") List<MultipartFile> pictures) throws Exception {
+        String loggedInUserEmail = getLoggedInUserEmail();
+        List<String> filesUploaded = this.memorySpotService.saveAlbum(loggedInUserEmail, albumName, pictures);
+        // Return the list of albums with HTTP 200 OK status
+        if(filesUploaded.isEmpty()) {
+            return ResponseEntity.internalServerError()
+                    .body("Sorry, something went wrong while creating album.");
+        } else {
+            return ResponseEntity.ok("Successfully created the album "+albumName);
+        }
+    }
+
+
     @GetMapping("/albums/{albumName}")
     public ResponseEntity<List<AlbumItemDTO>> getAlbumContent(@PathVariable String albumName) throws Exception {
         // This should come from the logged-in user's details
