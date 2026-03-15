@@ -128,3 +128,25 @@ export async function fetchAlbumContent(albumName) {
     return [];
 }
 
+export async function createAlbum(albumDetails) {
+    try {
+        let form = new FormData();
+        form.append("name", albumDetails.name);
+        for(let i=0; i<albumDetails.files.length; i++) {
+            form.append("pictures", albumDetails.files[i]);
+        }
+        let time = new Date().getTime();
+        let response = await fetch(baseUrl+"/memoryspot/albums", {
+            method: "POST",
+            credentials: "include",
+            body: form
+        });
+        if (response.ok) {
+            return response.text();
+        }
+    } catch (error) {
+        return null;
+    }
+
+    return null;
+}
