@@ -11,27 +11,17 @@ import MemorySpotPage from './components/pages/memoryspot/MemorySpotPage'
 import EngagementCenterPage from './components/pages/engagementcenter/EngagementCenterPage'
 import { useEffect, useState } from 'react'
 import { getLoggedInUser } from './components/common/dataCollection'
+import NotRegistered from './components/pages/NotRegistered'
 
 function App() {
-
-    let [userInfo, setUserInfo] = useState(null);
-    useEffect(() => {
-        if(!userInfo) {
-            let userResponsePromise = getLoggedInUser();
-                 userResponsePromise.then((user) => {
-                     if(!user || !user.email) {
-                         setUserInfo(user);
-                     }
-                 });
-        }
-    }, [userInfo]);
 
   return (
     <BrowserRouter>
       <div id="body-container">
-        <Header user={userInfo}/>
+        <Header/>
         <Routes>
           <Route path='/' element={<LoginPage />} />
+          <Route path='/not_registered' element={<NotRegistered />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/aboutus" element={<AboutUsPage />} />
           <Route path="/contactus" element={<ContactUsPage />} />

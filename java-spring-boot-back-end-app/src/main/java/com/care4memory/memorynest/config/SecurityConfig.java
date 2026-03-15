@@ -22,7 +22,7 @@ public class SecurityConfig {
                 // enables Google login
                 .oauth2Login(oauth -> {
                         oauth.loginPage("/oauth2/authorization/google");
-                        oauth.defaultSuccessUrl("http://localhost:5173/home", true);
+                        oauth.defaultSuccessUrl("/home", true);
                 })
                 .logout(logout -> logout
                         .logoutSuccessUrl("/")
