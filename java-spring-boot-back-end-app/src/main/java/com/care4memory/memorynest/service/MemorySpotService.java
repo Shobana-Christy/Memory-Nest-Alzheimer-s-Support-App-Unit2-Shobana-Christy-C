@@ -8,11 +8,9 @@ import com.cloudinary.utils.ObjectUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import static java.util.Arrays.stream;
 
 @Service
 public class MemorySpotService {
@@ -35,10 +33,34 @@ public class MemorySpotService {
                 .toList();
     }
 
+    public List<String> saveAlbum(String loggedInUserEmail, String albumName, List<MultipartFile> pictures) {
+        String folderPath = getFolderPath(loggedInUserEmail) + "/" + albumName;
+        Map inputProperties = ObjectUtils.asMap("resource_type", "image",
+                "overwrite", false,
+                "folder", folderPath);
+        List<String> filesUploaded = new ArrayList<>();
+        for(MultipartFile picture: pictures) {
+            try {
+                inputProperties.put("public_id", generateId(picture.getOriginalFilename()));
+                cloudinary.uploader().upload(picture.getBytes(), inputProperties);
+                filesUploaded.add(picture.getOriginalFilename());
+                System.out.println("successfully uploaded picture "+picture.getOriginalFilename()+" to "+folderPath);
+            } catch (Exception e) {
+                // continue with next picture
+                e.printStackTrace();
+            }
+        }
+        return filesUploaded;
+    }
+
+    private String generateId(String originalFileName){
+        return System.currentTimeMillis() + "_" + originalFileName.substring(originalFileName.lastIndexOf("/")+1);
+    }
+
     public List<AlbumItemDTO> getAlbumContent(String loggedInUserEmail, String albumName) throws Exception {
         // Logic to retrieve an album by its ID
         String folderPath = getFolderPath(loggedInUserEmail) + "/" + albumName;
-        Map input = ObjectUtils.asMap("resource_type", "image", "asset_folder", folderPath, "max_results", 30);
+        Map input = ObjectUtils.asMap("resource_type", "image", "folder", folderPath, "max_results", 30);
         ApiResponse response = cloudinary.api().resourcesByAssetFolder(folderPath, input);
         List<Map> resources = (List<Map>) response.get("resources");
         return resources
