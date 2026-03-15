@@ -2,7 +2,7 @@
     text-decoration: none;
     color: #264653;
     font-weight: bold;
-  
+
 }
 
 .link:hover {
@@ -12,8 +12,21 @@
 }
 
 main {
-    background-color: #f3f3f3;
+    background-color: ;
 }
+
+
+.login-page {
+    max-width: 600px;
+    text-align: center;
+    background: white;
+    padding: 10px 340px 40px 340px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+
+
 
 .home-intro {
   text-align: center;
@@ -37,7 +50,7 @@ main {
 #main-content-about-us h3 {
   display: flex;
   justify-content: center;
-  
+
 }
 
 .sub-nav {

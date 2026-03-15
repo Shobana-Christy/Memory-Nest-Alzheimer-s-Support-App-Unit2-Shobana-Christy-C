@@ -5,12 +5,20 @@ import "./memoryspot.css"
 import LoadingPage from "../LoadingPage";
 import AlbumDetail from "./AlbumDetail";
 import { useEffect } from "react";
-import { fetchAlbums } from "../../common/dataCollection";
+import AlbumForm from "./AlbumForm";
+import { fetchAlbums, createAlbum } from "../../common/dataCollection";
 
 const MemorySpotPage = () => {
     let [isLoading, setIsLoading] = useState(true);
     let [albums, setAlbums] = useState([]);
     let [selectedAlbum, setSelectedAlbum] = useState(null);
+    let [showAddEditAlbum, setShowAddEditAlbum] = useState(false);
+    const initialAlbumData = {
+        id: null,
+        name: "",
+        description: ""
+    };
+    let [album, setAlbum] = useState(initialAlbumData);
 
     useEffect(() => {
         const responsePromiseOne = fetchAlbums();
@@ -29,6 +37,37 @@ const MemorySpotPage = () => {
         setSelectedAlbum(null);
     }
 
+    const showEditAlbum = (event, album) => {
+        event.preventDefault();
+        setAlbum(album);
+        setShowAddEditAlbum(true);
+    }
+
+    const toggleAlbum = () => {
+        setShowAddEditAlbum(!showAddEditAlbum);
+        if (!showAddEditAlbum) {
+            setAlbum(initialAlbumData);
+        }
+    }
+
+    const handleSave = (album) => {
+        setShowAddEditAlbum(false);
+        let responsePromise = createAlbum(album);
+        responsePromise.then(response => {
+            if (response) {
+                let albumFromExistingList = albums.filter(al => al.name == album.name);
+                if(albumFromExistingList.length == 0) {
+                    setAlbums([...albums, album]);
+                }
+
+            }
+        });
+    }
+
+    const showAlbumDetails = (event, album) => {
+        setSelectedAlbum(album);
+    }
+
     return (
         <main>
             {
@@ -43,7 +82,9 @@ const MemorySpotPage = () => {
 
                             <h3>Memory Spot</h3>
                         </div>
-
+                        <div className="add-link">
+                            <a className="link" onClick={toggleAlbum}><span>+</span>Create album</a>
+                        </div>
                     </>
 
                 )
@@ -77,8 +118,8 @@ const MemorySpotPage = () => {
 
                 {
                     !isLoading && albums.length > 0 && !selectedAlbum &&
-                    albums.map((album) => (
-                        <Link key={album.id} onClick={(event) => handleEvent(event, album)}>
+                    albums.map((album, index) => (
+                        <Link key={index} onClick={() => showAlbumDetails(event, album)}>
                             <Tile>
                                 <h2>
                                     {album.name}
@@ -91,6 +132,10 @@ const MemorySpotPage = () => {
                     ))
                 }
 
+                {
+                    (showAddEditAlbum) &&
+                        <AlbumForm album={album} onClose={toggleAlbum} onSave={handleSave} />
+                }
                 {
                     selectedAlbum && (<AlbumDetail album={selectedAlbum} />)
                 }

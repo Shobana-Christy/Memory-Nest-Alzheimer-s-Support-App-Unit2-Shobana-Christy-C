@@ -2,6 +2,7 @@ import './App.css'
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 import { BrowserRouter, Routes, Route } from 'react-router'
+import LoginPage from './components/pages/LoginPage'
 import HomePage from './components/pages/HomePage'
 import AboutUsPage from './components/pages/AboutUsPage'
 import ContactUsPage from './components/pages/ContactUsPage'
@@ -28,9 +29,9 @@ function App() {
   return (
     <BrowserRouter>
       <div id="body-container">
-        <Header />
+        <Header user={userInfo}/>
         <Routes>
-          <Route path='/' element={<HomePage />} />
+          <Route path='/' element={<LoginPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/aboutus" element={<AboutUsPage />} />
           <Route path="/contactus" element={<ContactUsPage />} />
