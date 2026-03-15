@@ -1,21 +1,20 @@
 import { Link } from "react-router";
 import Tile from "../../common/Tile";
-
+import {useState, useEffect} from 'react';
+import {fetchEngagements} from '../../common/dataCollection';
 
 const EngagementCenterPage = () => {
-    const engagements = [
-        {
-            id: 1,
-            name: "Chess",
-            source: "https://chess.com"
-        },
-        {
-            id: 2,
-            name: "Sudoku",
-            source: "https://sudoku.com/"
-        },
 
-    ];
+    let [engagements, setEngagements] = useState([]);
+    useEffect(() => {
+        let responsePromise = fetchEngagements();
+        responsePromise.then(response => {
+          if(response) {
+            setEngagements(response);
+          }
+        });
+    }, []);
+
     return (
         <main>
             <div className="main-page-header">
@@ -28,8 +27,8 @@ const EngagementCenterPage = () => {
             </div>
             <div className="engagement-detail-container">
                 {
-                    engagements.map((engagement) => (
-                        <Link className="link" key={engagement.id} to={engagement.source} target="_blank">
+                    engagements.map((engagement, index) => (
+                        <Link className="link" key={index} to={engagement.src} target="_blank">
                             <Tile text={engagement.name} ></Tile>
                         </Link>
                     ))

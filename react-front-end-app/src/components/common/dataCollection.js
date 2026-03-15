@@ -150,3 +150,19 @@ export async function createAlbum(albumDetails) {
 
     return null;
 }
+
+export async function fetchEngagements() {
+    try {
+        let time = new Date().getTime();
+        let response = await fetch(baseUrl+"/engagementcenter", {
+            credentials: "include"
+        });
+        if (response.ok) {
+            return response.json();
+        }
+    } catch (error) {
+        return [];
+    }
+
+    return [];
+}
