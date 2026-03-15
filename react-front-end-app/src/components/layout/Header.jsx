@@ -2,6 +2,7 @@ import {Link} from 'react-router';
 import './layout.css';
 
 const Header = () => {
+
     return (
 
         <header className="header">
