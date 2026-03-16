@@ -27,7 +27,7 @@ public class HomePageController {
                 return "redirect:"+this.frontEndBaseUrl+"/home";
             }
         } catch (Exception e) {
-            System.out.println("User not found in our database");
+            // not doing anything here, redirect to not registered page.
         }
         return "redirect:"+this.frontEndBaseUrl+"/not_registered";
     }

@@ -6,9 +6,11 @@ import Reminder from "./reminder";
 import { FaTrash } from "react-icons/fa";
 import ReminderForm from "./ReminderForm";
 import { fetchReminders, addReminder, updateReminder, deleteReminder } from './../../common/dataCollection';
+import Alert from '../../common/Alert'
 
 const RemindersPage = () => {
     let [isLoading, setIsLoading] = useState(true);
+    let [alert,setAlert] = useState(null);
     let [reminders, setReminders] = useState(null);
     // show the popup form
     let [showAddEditReminder, setShowAddEditReminder] = useState(false);
@@ -19,15 +21,26 @@ const RemindersPage = () => {
         time: "",
         notes: ""
     };
+    useEffect(() => {
+        if(alert) {
+            // after 1 second, remove the success message alert
+            const timer = setTimeout(() => setAlert(null), 1000);
+            return () => clearTimeout(timer); // clears the timeout operation
+        }
+    }, [alert]);
+
     // to track the edit operation
     let [reminder, setReminder] = useState(initialReminderData);
-
     useEffect(() => {
         const responsePromiseOne = fetchReminders();
-        responsePromiseOne.then((reminders) => {
+        responsePromiseOne.then((response) => {
             setIsLoading(false);
-            setReminders(reminders);
-            console.log("reminders: ", reminders);
+            if(response.success == true) {
+                setReminders(response.data);
+            } else {
+                setReminders([]);
+                setAlert(response.error);
+            }
         });
     }, []);
 
@@ -41,18 +54,28 @@ const RemindersPage = () => {
             reminderToUpdate.time = time;
             reminderToUpdate.notes = notes;
             const responsePromise = updateReminder(reminderToUpdate);
-            responsePromise.then((updatedReminder) => {
-                if (updatedReminder) {
+            responsePromise.then((response) => {
+                if (response.success == true) {
+                    let updatedReminder = response.data;
                     let existingReminders = reminders.filter(r => r.id != updatedReminder.id);
-                    setReminders([...existingReminders, updatedReminder]);
+                    if(response.success == true) {
+                        setReminders([...existingReminders, updatedReminder]);
+                        setAlert("Successfully updated the reminder.");
+                    } else {
+                        setAlert(response.error);
+                    }
                 }
             });
         } else {
             const newReminder = new Reminder(null, name, date, time, notes);
             const responsePromise = addReminder(newReminder);
-            responsePromise.then((savedReminder) => {
-                if (savedReminder) {
+            responsePromise.then((response) => {
+                 if(response.success == true) {
+                     let savedReminder = response.data;
                     setReminders([...reminders, savedReminder]);
+                    setAlert("Successfully added the reminder.");
+                } else {
+                    setAlert("Error adding the reminder, "+response.error);
                 }
             });
         }
@@ -81,9 +104,12 @@ const RemindersPage = () => {
         //This ensures only the delete action runs.
         const responsePromise = deleteReminder(reminderId);
         responsePromise.then((response) => {
-            if (response) {
+            if (response.success == true) {
                 const remindersAfterDelete = [...reminders].filter(r => r.id != reminderId);
                 setReminders(remindersAfterDelete);
+                setAlert("Successfully deleted the reminder");
+            } else {
+                setAlert("Error deleting the reminder, "+response.error);
             }
         });
     }
@@ -141,7 +167,10 @@ const RemindersPage = () => {
                 (showAddEditReminder) &&
                 <ReminderForm reminder={reminder} onClose={toggleReminder} onSave={handleSave}/>
             }
-
+            {
+                alert &&
+                <Alert message = {alert} />
+            }
         </main>
     );
 };

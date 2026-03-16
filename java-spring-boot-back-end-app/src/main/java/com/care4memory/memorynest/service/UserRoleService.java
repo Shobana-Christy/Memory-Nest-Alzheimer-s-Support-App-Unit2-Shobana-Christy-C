@@ -1,6 +1,7 @@
 package com.care4memory.memorynest.service;
 
 import com.care4memory.memorynest.dto.UserRoleDTO;
+import com.care4memory.memorynest.error.UserNotFound;
 import com.care4memory.memorynest.model.UserRoleEntity;
 import com.care4memory.memorynest.repositories.UserRoleRepository;
 import org.springframework.security.core.Authentication;
@@ -32,7 +33,7 @@ public class UserRoleService {
                 .orElse(null);
     }
 
-    public UserRoleDTO getUserInfo() {
+    public UserRoleDTO getUserInfo() throws UserNotFound {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.getPrincipal() != null) {
             OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
@@ -42,10 +43,10 @@ public class UserRoleService {
         return null;
     }
 
-    public UserRoleDTO getUserRoleByEmail(String email) {
+    public UserRoleDTO getUserRoleByEmail(String email) throws UserNotFound {
         return this.userRoleRepository.findByEmail(email)
                 .map(this::convertToDto)
-                .orElse(null);
+                .orElseThrow(() -> new UserNotFound("User "+email+" not found"));
     }
 
     private UserRoleDTO convertToDto(UserRoleEntity userRoleEntity) {
