@@ -24,7 +24,6 @@ public class ReminderController {
 
     @GetMapping()
     public ResponseEntity<List<ReminderDTO>> getReminders() {
-        System.out.println("Received request to get all reminders");
         List<ReminderDTO> reminders = this.reminderService.viewReminders();
         return ResponseEntity.ok(reminders); // Return the list of reminders with HTTP 200 OK status
     }
