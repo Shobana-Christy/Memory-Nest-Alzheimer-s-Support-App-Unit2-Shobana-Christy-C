@@ -1,10 +1,6 @@
 
 export const baseUrl = "http://localhost:8080";
 
-export async function logout() {
-
-}
-
 export async function getLoggedInUser() {
     try {
         let response = await fetch(baseUrl+"/user", { credentials: "include" });
@@ -24,12 +20,14 @@ export async function fetchReminders() {
         // await ensures the request will wait for the response
         let response = await fetch(baseUrl+"/reminders?time="+time, { credentials: "include" });
         if (response.ok) {
-            return response.json();
+            return { success: true, data: await response.json() };
+        } else {
+            let errorMessage = await response.text();
+            return { success: false, error: errorMessage || "Failed to fetch the reminders" };
         }
     } catch (error) {
-        return [];
+        return { success: false, error: error.message || "An error occurred while fetching the reminders" };
     }
-    return [];
 }
 
 export async function addReminder(reminder) {
@@ -44,13 +42,14 @@ export async function addReminder(reminder) {
         });
 
         if (response.ok) {
-            return response.json();
+            return { success: true, data: await response.json() };
+        } else {
+            let errorMessage = await response.text();
+            return { success: false, error: errorMessage || "Failed to add the reminder" };
         }
     } catch (error) {
-        return null;
+        return { success: false, error: error.message || "An error occurred while adding the reminder" };
     }
-
-    return null;
 }
 
 export async function updateReminder(reminder) {
@@ -65,13 +64,14 @@ export async function updateReminder(reminder) {
         });
 
         if (response.ok) {
-            return response.json();
+            return { success: true, data: await response.json() };
+        } else {
+            let errorMessage = await response.text();
+            return { success: false, error: errorMessage || "Failed to update the reminder" };
         }
     } catch (error) {
-        return null;
+        return { success: false, error: error.message || "An error occurred while updating the reminder" };
     }
-
-    return null;
 }
 
 export async function deleteReminder(reminderId) {
@@ -85,13 +85,14 @@ export async function deleteReminder(reminderId) {
         });
 
         if (response.ok) {
-            return response.text();
+            return { success: true, data: await response.text() };
+        } else {
+            let errorMessage = await response.text();
+            return { success: false, error: errorMessage || "Failed to delete the reminder" };
         }
     } catch (error) {
-        return null;
+        return { success: false, error: error.message || "An error occurred while deleting the reminder" };
     }
-
-    return null;
 }
 
 // retrieve the json from public folder
@@ -142,13 +143,14 @@ export async function createAlbum(albumDetails) {
             body: form
         });
         if (response.ok) {
-            return response.text();
+            return { success: true, data: await response.text() };
+        } else {
+            let errorMessage = await response.text();
+            return { success: false, error: errorMessage || "Failed to create album" };
         }
     } catch (error) {
-        return null;
+        return { success: false, error: error.message || "An error occurred while creating the album" };
     }
-
-    return null;
 }
 
 export async function fetchEngagements() {
@@ -165,4 +167,8 @@ export async function fetchEngagements() {
     }
 
     return [];
+}
+
+export function login() {
+    window.location.href = "http://localhost:5173";
 }

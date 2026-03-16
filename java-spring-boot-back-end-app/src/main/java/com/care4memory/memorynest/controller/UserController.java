@@ -1,6 +1,7 @@
 package com.care4memory.memorynest.controller;
 
 import com.care4memory.memorynest.dto.UserRoleDTO;
+import com.care4memory.memorynest.error.UserNotFound;
 import com.care4memory.memorynest.service.UserRoleService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,7 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<UserRoleDTO> getUserInfo() {
+    public ResponseEntity<UserRoleDTO> getUserInfo() throws UserNotFound {
         UserRoleDTO user = userRoleService.getUserInfo();
         if(user != null) {
             // Return the user information with HTTP 200 OK status

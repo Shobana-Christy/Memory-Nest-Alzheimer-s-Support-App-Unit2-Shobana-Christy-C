@@ -3,8 +3,9 @@ import Button from "../../common/Button";
 import InputErrorMessage from "../../forms/input/InputErrorMessage";
 import "../pages.css";
 import "./album-form.css";
+import "./memoryspot.css"
 
-const AlbumForm = ({ album, onClose, onSave }) => {
+const AlbumForm = ({ album, onClose, onSave, error }) => {
 
     const initialAlbumData = {
         name: "",
@@ -21,7 +22,7 @@ const AlbumForm = ({ album, onClose, onSave }) => {
     let [hasErrors, setHasError] = useState(false);
 
     const isValid = () => {
-        return form.name && form.files;
+        return form.name && form.files && form.files.length > 0;
     }
 
     const handleChange = (event) => {
@@ -39,11 +40,11 @@ const AlbumForm = ({ album, onClose, onSave }) => {
 
     const handleClick = (event) => {
         event.preventDefault();
-        const addOrUpdatedAlbum = { ...form };
         if (!isValid()) {
             setHasError(true);
         } else {
             setHasError(false);
+            const addOrUpdatedAlbum = { ...form };
             //reset the form values for next add or edit
             setForm(initialAlbumData);
             onSave(addOrUpdatedAlbum); // call onSave event handler
@@ -56,14 +57,19 @@ const AlbumForm = ({ album, onClose, onSave }) => {
         <div className="mask-layer">
             <div className="popup-container">
                 <h4>{album.name ? "Edit" : "Create"} Album</h4>
+                {error && <div className="error-msg">{error}</div>}
                 <form>
+
                     <div className="form-group" style={{ paddingBottom: "15px" }}>
-                        <input type="text" name="name" value={form.name} onChange={handleChange} placeholder="Album Name" />
-                        {hasErrors && !form.name && <InputErrorMessage message={errorMessage.nameRequired} />}
+                        <input type="text" name="name" value={form.name}
+                         onChange={handleChange} placeholder="Album Name" />
+                       <InputErrorMessage hasError={hasErrors && form.name === ''}
+                       message={errorMessage.nameRequired} />
                     </div>
                     <div className="form-group">
                         <input type="file" name="files" multiple onChange={handleChange} accept=".jpg, .jpeg, .png"/>
-                        {hasErrors && !form.files && <InputErrorMessage message={errorMessage.pictureRequired} />}
+                        <InputErrorMessage hasError={hasErrors && form.files.length === 0}
+                            message={errorMessage.pictureRequired} />
                     </div>
                     <div className="button-group">
                         <Button onClick={handleClick} label={album.name ? "Update" : "Create"}></Button>&nbsp;&nbsp;

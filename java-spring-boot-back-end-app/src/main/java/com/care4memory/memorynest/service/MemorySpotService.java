@@ -44,7 +44,6 @@ public class MemorySpotService {
                 inputProperties.put("public_id", generateId(picture.getOriginalFilename()));
                 cloudinary.uploader().upload(picture.getBytes(), inputProperties);
                 filesUploaded.add(picture.getOriginalFilename());
-                System.out.println("successfully uploaded picture "+picture.getOriginalFilename()+" to "+folderPath);
             } catch (Exception e) {
                 // continue with next picture
                 e.printStackTrace();

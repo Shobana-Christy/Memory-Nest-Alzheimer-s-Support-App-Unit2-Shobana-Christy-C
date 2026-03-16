@@ -13,6 +13,7 @@ const MemorySpotPage = () => {
     let [albums, setAlbums] = useState([]);
     let [selectedAlbum, setSelectedAlbum] = useState(null);
     let [showAddEditAlbum, setShowAddEditAlbum] = useState(false);
+    let [albumError, setAlbumError] = useState(null);
     const initialAlbumData = {
         id: null,
         name: "",
@@ -51,15 +52,17 @@ const MemorySpotPage = () => {
     }
 
     const handleSave = (album) => {
-        setShowAddEditAlbum(false);
+        setAlbumError(null);
         let responsePromise = createAlbum(album);
         responsePromise.then(response => {
-            if (response) {
+            if (response.success) {
+                setShowAddEditAlbum(false);
                 let albumFromExistingList = albums.filter(al => al.name == album.name);
                 if(albumFromExistingList.length == 0) {
                     setAlbums([...albums, album]);
                 }
-
+            } else {
+                setAlbumError(response.error);
             }
         });
     }
@@ -134,7 +137,7 @@ const MemorySpotPage = () => {
 
                 {
                     (showAddEditAlbum) &&
-                        <AlbumForm album={album} onClose={toggleAlbum} onSave={handleSave} />
+                        <AlbumForm album={album} onClose={toggleAlbum} onSave={handleSave} error={albumError} />
                 }
                 {
                     selectedAlbum && (<AlbumDetail album={selectedAlbum} />)

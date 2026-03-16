@@ -2,7 +2,9 @@ package com.care4memory.memorynest.controller;
 
 import com.care4memory.memorynest.dto.AlbumDTO;
 import com.care4memory.memorynest.dto.AlbumItemDTO;
+import com.care4memory.memorynest.error.UserNotFound;
 import com.care4memory.memorynest.service.MemorySpotService;
+import com.care4memory.memorynest.service.UserRoleService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -18,9 +20,11 @@ import java.util.List;
 public class MemorySpotController {
 
     private final MemorySpotService memorySpotService;
+    private final UserRoleService userRoleService;
 
-    public MemorySpotController(MemorySpotService memorySpotService) {
+    public MemorySpotController(MemorySpotService memorySpotService, UserRoleService userRoleService) {
         this.memorySpotService = memorySpotService;
+        this.userRoleService = userRoleService;
     }
 
     @GetMapping(value = "/albums")
@@ -44,7 +48,6 @@ public class MemorySpotController {
             return ResponseEntity.ok("Successfully created the album "+albumName);
         }
     }
-
 
     @GetMapping("/albums/{albumName}")
     public ResponseEntity<List<AlbumItemDTO>> getAlbumContent(@PathVariable String albumName) throws Exception {
@@ -73,12 +76,12 @@ public class MemorySpotController {
                 .body(savedAlbum);
     }
 
-    private String getLoggedInUserEmail() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.getPrincipal() != null) {
-            OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
-            return oauth2User.getAttribute("email");
-        }
-        return null;
+    private String getLoggedInUserEmail() throws UserNotFound {
+        return userRoleService.getUserInfo().getEmail();
+    }
+
+    @ExceptionHandler(UserNotFound.class)
+    public ResponseEntity<String> handlerUserNotFound(UserNotFound userNotFound) {
+        return ResponseEntity.badRequest().body(userNotFound.getMessage());
     }
 }
