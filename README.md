@@ -257,6 +257,7 @@ All user‑specific endpoints require Google OAuth authentication.
 - Manage users
 - Monitor uploads and activities
 - Approve or remove content
+  
 📝 Registration System
 - Email/password signup
 - Role‑based access (Admin, Caregiver, User)
@@ -267,6 +268,8 @@ All user‑specific endpoints require Google OAuth authentication.
 
 
 Full‑Stack Developer (React • Java • Spring Boot)
+
+LaunchCode Full-Stack Development Program
 
 
 
