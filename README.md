@@ -2,6 +2,9 @@
 
 A full‑stack web application designed to help individuals with memory challenges to stay organized, emotionally connected, and mentally engaged. Memory Nest provides a calming, accessible experience with features like Google OAuth login, Reminders, Memory Spot (photo storage), and an Engagement Center.
 
+<img width="1920" height="979" alt="Screenshot (915)" src="https://github.com/user-attachments/assets/82f6e8e2-36f8-44c7-9d0e-f7239952123d" />
+
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ✨ Features
@@ -84,18 +87,23 @@ src/main/resources/application.properties
 
 # MySQL Configuration
 spring.datasource.url=jdbc:mysql://localhost:3306/memorynest
+
 spring.datasource.username=${DB_USERNAME}
+
 spring.datasource.password=${DB_PASSWORD}
 
 spring.jpa.hibernate.ddl-auto=update
 
 # Google OAuth2
 spring.security.oauth2.client.registration.google.client-id=${GOOGLE_CLIENT_ID}
+
 spring.security.oauth2.client.registration.google.client-secret=${GOOGLE_CLIENT_SECRET}
 
 # Cloudinary
 cloudinary.cloud-name=${CLOUDINARY_CLOUD_NAME}
+
 cloudinary.api-key=${CLOUDINARY_API_KEY}
+
 cloudinary.api-secret=${CLOUDINARY_API_SECRET}
 
 
@@ -107,15 +115,19 @@ backend/.env
 Add your real credentials:
 # MySQL
 DB_USERNAME=your_mysql_username
+
 DB_PASSWORD=your_mysql_password
 
 # Cloudinary
 CLOUDINARY_CLOUD_NAME=your_cloud_name
+
 CLOUDINARY_API_KEY=your_api_key
+
 CLOUDINARY_API_SECRET=your_api_secret
 
 # Google OAuth
 GOOGLE_CLIENT_ID=your_google_client_id
+
 GOOGLE_CLIENT_SECRET=your_google_client_secret
 
 
