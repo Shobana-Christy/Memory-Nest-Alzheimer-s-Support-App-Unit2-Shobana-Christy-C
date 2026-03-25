@@ -243,9 +243,6 @@ All user‑specific endpoints require Google OAuth authentication.
 | HTTP Method | Endpoint | Description | Access |
 |-------------|----------|-------------|--------|
 | 🟢 GET | `/oauth2/authorization/google` | Redirect user to Google login | 🌎 Public |
-| 🟢 GET | `/login/oauth2/code/google` | Google OAuth callback | 🌎 Public |
-| 🟢 GET | `/user` | Get logged‑in user details | 🔐 Auth Required |
-| 🟢 GET | `/logout` | Logout user and clear session | 🔐 Auth Required |
 
 
 
